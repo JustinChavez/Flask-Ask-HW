@@ -1,0 +1,17 @@
+welcome: Welcome to the summer internship flowchart. You can always say stop to exit. Let's begin! 
+
+round: You are currently in state {{ state }}.
+
+win: Good job!
+
+lose: Sorry, that's the wrong answer.
+
+help: This is the logic game. INSERT MORE HELPFUL INFORMATION Would you like to return to the game?
+
+helpyes: Yay you just returned from help yes
+
+helpno: Yay you just returned from help no
+
+end: You are in state 4 game over.
+
+stop: Stop call activated. Now exiting.
