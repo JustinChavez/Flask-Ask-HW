@@ -1,17 +1,36 @@
-welcome: Welcome to the summer internship flowchart. You can always say stop to exit. Let's begin! 
+welcome: Welcome to the internship game! This is an interactive flowchart that assumes you are in high school. You can always say stop to exit. Let's begin! 
 
-round: You are currently in state {{ state }}.
+help: This is the Should I apply for an internship in High School, game. I will ask you a question pertaining to getting an internship and you will respond either yes or no until the game is over. Okay. Would you like to return to the game?
 
-win: Good job!
+continue: Okay. Let's continue.
 
-lose: Sorry, that's the wrong answer.
-
-help: This is the logic game. INSERT MORE HELPFUL INFORMATION Would you like to return to the game?
-
-helpyes: Yay you just returned from help yes
-
-helpno: Yay you just returned from help no
-
-end: You are in state 4 game over.
+helpno: Okay. Exiting.
 
 stop: Stop call activated. Now exiting.
+
+S1: Are you interested in a summer internship?
+
+S1_No: No? What are you doing here! Just kidding. Let's continue.
+
+S1_Yes: Nice. I expected nothing less of your ambition! Let's continue. 
+
+S2: Do you think you can get an internship?
+
+S2_No: Nah. I am sure you can. Most internships don't expect anything except an interest and determination. Let's move on.
+
+S2_Yes: Great, that's the spirit! Really you can achieve anything with a little effort. Let's move on. 
+
+S3: Do you have a letter of recommendation?
+
+S3_No: Well then, it is time to get one! Examples of who to ask are your teacher, school counselor, or even sport coaches. Just remember to give them enough time to write the letter! Okay, last question.
+
+S3_Yes: Nice! Not all opportunities require this, but it helps to have one handy. Okay, last question.
+
+S4: Do you know what you want to major in for college?
+
+S4_No: No worries. My creator didn't either. An internship would really help you explore the options. 
+
+S4_Yes: Awesome! An internship would really strengthen your application.
+
+End: That is all the questions! Based on your answers you should definitely apply for an internship. Check the link in the description of this skill for a list of internships you can apply for right now! Good luck!
+

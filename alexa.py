@@ -14,18 +14,21 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 BeginState = "S1"
 
-endStates = list()
-endStates.append("S4")
+endStates = dict()
+endStates["S5"] = 'End'
 
 yesTrans = dict()
-yesTrans["S1"] = "S4"
-yesTrans["S2"] = "S4"
-yesTrans["S3"] = "S1"
+yesTrans["S1"] = ["S2", "S1_Yes"]
+yesTrans["S2"] = ["S3", "S2_Yes"]
+yesTrans["S3"] = ["S4", "S3_Yes"]
+yesTrans["S4"] = ["S5", "S4_Yes"]
 
 noTrans = dict()
-noTrans["S1"] = "S2"
-noTrans["S2"] = "S3"
-noTrans["S3"] = "S4"
+noTrans["S1"] = ["S2", "S1_No"]
+noTrans["S2"] = ["S3", "S2_No"]
+noTrans["S3"] = ["S4", "S3_No"]
+noTrans["S4"] = ["S5", "S4_No"]
+
 
 
 
@@ -34,12 +37,12 @@ noTrans["S3"] = "S4"
 def new_game():
     
     welcome_msg = render_template('welcome')
-    win = render_template('win')
-    #win = render_template('win')
     session.attributes['state'] = BeginState
     session.attributes['help'] = False
 
-    return question(welcome_msg + " " + win)
+    start = render_template(session.attributes['state'])
+
+    return question(welcome_msg + " " + start)
 
 
 @ask.intent("YesIntent")
@@ -48,34 +51,41 @@ def next_round():
 
     #if currently in help state
     if(session.attributes['help']):
-        round_msg = render_template('round', state=session.attributes['state'])
+        round_msg1 = render_template('continue')
+        round_msg2 = render_template(session.attributes['state'])
         session.attributes['help'] = False
-        return question(round_msg)
+        return question(round_msg1 + " " + round_msg2)
 
-    session.attributes['state'] = yesTrans[session.attributes['state']]
+    session.attributes['state'], next_statement = yesTrans[session.attributes['state']]
     
     if(session.attributes['state'] in endStates):
-        round_msg = render_template('end')
-        return statement(round_msg)
+        #retrieve the specific end message for the specific state
+        round_msg = render_template(endStates[session.attributes['state']])
+        round_msg1 = render_template(next_statement)
+        return statement( round_msg1 + " " + round_msg)
     else:
-        round_msg = render_template('round', state=session.attributes['state'])
-        return question(round_msg)
+        round_msg = render_template(next_statement)
+        round_msg1 = render_template(session.attributes['state'])
+        return question(round_msg+ " " + round_msg1)
 
 @ask.intent("NoIntent")
 def next_round():
     if(session.attributes['help']):
         round_msg = render_template('helpno')
-        return question(round_msg)
+        return statement(round_msg)
 
 
-    session.attributes['state'] = noTrans[session.attributes['state']]
+    session.attributes['state'], next_statement = noTrans[session.attributes['state']]
 
     if(session.attributes['state'] in endStates):
-        round_msg = render_template('end')
-        return statement(round_msg)
+        #retrieve the specific end message for the specific state
+        round_msg = render_template(endStates[session.attributes['state']])
+        round_msg1 = render_template(next_statement)
+        return statement(round_msg1 + " " + round_msg)
     else:
-        round_msg = render_template('round', state=session.attributes['state'])
-        return question(round_msg)
+        round_msg = render_template(next_statement)
+        round_msg1 = render_template(session.attributes['state'])
+        return question(round_msg + " " + round_msg1)
 
 
 @ask.intent("AMAZON.HelpIntent")
@@ -91,21 +101,10 @@ def next_round():
     round_msg = render_template('stop')
     return statement(round_msg)
 
-@ask.intent("AnswerIntent", convert={'first': int, 'second': int, 'third': int})
-
-def answer(first, second, third):
-
-    winning_numbers = session.attributes['numbers']
-
-    if [first, second, third] == winning_numbers:
-
-        msg = render_template('win')
-
-    else:
-
-        msg = render_template('lose')
-
-    return statement(msg)
+@ask.intent("AMAZON.CancelIntent")
+def next_round():
+    round_msg = render_template('stop')
+    return statement(round_msg)
 
 
 if __name__ == '__main__':
