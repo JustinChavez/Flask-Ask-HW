@@ -1,15 +1,22 @@
+# Intro
+
 In this tutorial I will be teaching how to make a Yes/No Framework easily as an Amazon Alexa skill.
 
 For this tutorial I will demonstrate by encoding one of my favorite flowcharts from PHD Comics:
 
-http://www.phdcomics.com/comics.php?f=1632
+![alt text](https://raw.githubusercontent.com/JustinChavez/Flask-Ask-HW/master/tutorial/images/phd01.png "From PHD Comics")
+
+Reference: http://www.phdcomics.com/comics.php?f=1632
 
 (Note: I will be adding slight adjustments to the logic flow since not all answers are Yes/No in the comic.)
+
+# Setup
 
 We will be using the Python framework [Flask-Ask](https://github.com/johnwheeler/flask-ask) for this tutorial. Please follow [this quick introduction](https://developer.amazon.com/blogs/post/Tx14R0IYYGH3SKT/Flask-Ask-A-New-Python-Framework-for-Rapid-Alexa-Skills-Kit-Development) to the framework to get your development environment setup.
 
 With your development environment set we can now move on 
 
+# Build the Framework
 First before you start you should have the framework you want to build into the Alexa skill ready. Just make sure that there is only one state that your logic flow starts with and only Yes/No answers each question.
 
 Next take your flowchart and label each question and ending statement with a number for reference to its state. 
@@ -77,7 +84,9 @@ S10: Ok, you have a legitimate question. Do you actually care about the answer?
 
 S11: FINE, ASK YOUR QUESTION.
 ```
-We can now move on to building the logic. 
+
+# Build the intents
+We can now move on to building the logic in the intents. 
 
 Adjust the new_game function so that it will start on the indicated BeginState.
 
@@ -127,13 +136,9 @@ def next_round():
         round_msg = render_template(session.attributes['state'])
         return question(round_msg)
 ```
-
+# Conclusion
 And that is all the code you need! Feel free to reference my code in alexa.py and templates.yaml. There I included a couple more intents to add help, stop, and cancel intents. Those intents are not needed for functionality, but are needed if you intend to publish to the Amazon store.
 
 Hope this helps!
 
 Justin
-
-
-
-
