@@ -4,7 +4,7 @@ In this tutorial I will be teaching how to make a Yes/No Framework easily as an 
 
 For this tutorial I will demonstrate by encoding one of my favorite flowcharts from PHD Comics:
 
-![image][https://raw.githubusercontent.com/JustinChavez/Flask-Ask-HW/master/tutorial/images/phd01.png]
+![alt text](https://raw.githubusercontent.com/JustinChavez/Flask-Ask-HW/master/tutorial/images/phd01.png "From PHD Comics")
 
 Reference: http://www.phdcomics.com/comics.php?f=1632
 
