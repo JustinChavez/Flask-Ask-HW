@@ -1,8 +1,8 @@
 # Intro
 
-In this tutorial I will be teaching how to make a Yes/No Framework easily as an Amazon Alexa skill.
+In this tutorial I will be teaching how to make a Yes/No Framework as an Amazon Alexa skill.
 
-For this tutorial I will demonstrate by encoding one of my favorite flowcharts from PHD Comics:
+I will demonstrate by building one of my favorite flowcharts from PHD Comics:
 
 ![alt text](https://raw.githubusercontent.com/JustinChavez/Flask-Ask-HW/master/tutorial/images/phd01.png "From PHD Comics")
 
@@ -17,25 +17,23 @@ We will be using the Python framework [Flask-Ask](https://github.com/johnwheeler
 With your development environment set we can now move on 
 
 # Build the Framework
-First before you start you should have the framework you want to build into the Alexa skill ready. Just make sure that there is only one state that your logic flow starts with and only Yes/No answers each question.
+First before you start you should have the framework you want to build into the Alexa skill ready. Just make sure that there is only one state that your logic flow starts with and only Yes/No answers to each question.
 
-Next take your flowchart and label each question and ending statement with a number for reference to its state. 
+Next take your flowchart and label each question and ending statement with a number for reference to its state. For my flowchart I labeled each state with S1-11:
 
-Insert phd02
+![alt text](https://raw.githubusercontent.com/JustinChavez/Flask-Ask-HW/master/tutorial/images/phd02.png "Adjusted from PHD Comics")
 
-In Python we will be using these state references to build the framework. 
-
-Now in your Python file, set a variable BeginState to reference the state that your framework begins on. For mine that would be state S1
+Now in your Python file, set a variable BeginState to reference the state that your framework begins on. For mine that would be state S1:
 
 ```Python
 BeginState = "S1"
 ```
-Next create a variable name endStates where you list the states that end the logic flow
+Next create a variable named endStates where you list the states that ends the framework:
 
 ```Python
 endStates = ["S4","S7","S9","S11"]
 ```
-We now need can direct the logic flow. We will create two dictionaries where the key is the current state and the value will be the next state to go to based on the answer. 
+We now need can direct the logic flow. We will create two dictionaries where the key is the current state and the value will be the next state to go to based on the answer Yes/No. 
 
 ```Python
 yesTrans = dict()
@@ -57,7 +55,7 @@ noTrans["S6"] = "S8"
 noTrans["S8"] = "S10"
 noTrans["S10"] = "S11"
 ```
-For example, in my flowchart state S1 when given the answer yes moves to state S3. Thus in the yesTrans dictionary the key S1 has the value S3. 
+For example, in my flowchart state S1 when given the answer yes moves to state S3. Thus I create in the yesTrans dictionary the key S1 has the value S3.
 
 Now lets update our templates.yaml file to contain the correct phrases at each state. The key should be the state name and the value is the question or statment the state represents. Here is mine:
 
@@ -137,7 +135,7 @@ def next_round():
         return question(round_msg)
 ```
 # Conclusion
-And that is all the code you need! Feel free to reference my code in alexa.py and templates.yaml. There I included a couple more intents to add help, stop, and cancel intents. Those intents are not needed for functionality, but are needed if you intend to publish to the Amazon store.
+And that is all the code you need! Feel free to reference my code in alexa.py and templates.yaml. There I included a couple more intents to add help, stop, and cancel. Those intents are not needed for functionality, but are needed if you intend to publish to the Amazon store.
 
 Hope this helps!
 
