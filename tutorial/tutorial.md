@@ -20,6 +20,6 @@ In Python we will be using these state references to build the framework.
 
 Now in your Python file, set a variable BeginState to reference the state that your framework begins on. For mine that would be state S1
 
-'''Python
+```Python
 BeginState = "S1"
-'''
+```
